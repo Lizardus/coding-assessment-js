@@ -6,7 +6,7 @@ import {
 
 export const initialState = fromJS({
   isFetching: false,
-  images: [],
+  images: new List(),
 });
 
 export const imagesReducer = (state = initialState, action) => {
