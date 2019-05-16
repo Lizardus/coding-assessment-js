@@ -8,6 +8,7 @@ export const App = ({message, href, fetch}) => {
 
   return <div className="App">
     <header className="App-header">
+      <h1>Heeheeheehee</h1>
       <img src={logo} className="App-logo" alt="logo" />
       <a
         className="App-link"
