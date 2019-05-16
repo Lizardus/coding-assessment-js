@@ -1,10 +1,10 @@
 import { ofType } from 'redux-observable';
-import {timer} from 'rxjs';
-import {mergeMap, map} from 'rxjs/operators';
+import { timer } from 'rxjs';
+import { mergeMap, map } from 'rxjs/operators';
 
 const setLink = link => ({ type: 'setLink', link });
 
-export default action$ => action$.pipe(
+export const fetchMessage = action$ => action$.pipe(
   ofType('fetch'),
   mergeMap(() =>
     timer(5000).pipe(
