@@ -14,10 +14,10 @@ export const imagesReducer = (state = initialState, action) => {
     case FETCH_IMAGES:
       return state.set('isFetching', true);
     case FETCH_IMAGES_FULFILLED:
-      return state.merge({
-        isFetching: false,
-        images: [],
-      })
+
+      return state
+        .set('isFetching', false)
+        .set('images', state.get('images').concat(action.payload));
     default:
       return state;
   }

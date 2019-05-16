@@ -25,11 +25,11 @@ describe('Images Reducer', () => {
         payload: [{}, {}, {}],
       };
 
-      const actualState = imagesReducer(initialState, action);
+      const actualState = imagesReducer(initialState, action).toJS();
       const expectedState = initialState.merge({
         isFetching: false,
-        images: [],
-      });
+        images: action.payload,
+      }).toJS();
 
       expect(actualState).toEqual(expectedState);
     });
