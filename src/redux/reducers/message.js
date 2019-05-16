@@ -3,7 +3,7 @@ const initialState = {
   href: null
 };
 
-export default function(state = initialState, action) {
+export const messageReducer = (state = initialState, action) => {
   return action.type === 'setLink'
     ? {
       ...state,
@@ -11,4 +11,4 @@ export default function(state = initialState, action) {
       href: action.link.href
     }
     : state;
-}
+};
