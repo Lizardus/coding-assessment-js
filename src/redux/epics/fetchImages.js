@@ -12,7 +12,7 @@ export const fetchImages = action$ => action$.pipe(
     ajax.getJSON('https://jsonplaceholder.typicode.com/photos').pipe(
       map(response => ({
         type: FETCH_IMAGES_FULFILLED,
-        response,
+        payload: response,
       }))
     )
   )

@@ -8,12 +8,30 @@ import { imagesReducer, initialState } from '../images';
 describe('Images Reducer', () => {
   describe(FETCH_IMAGES, () => {
     it('sets isFetching to true', () => {
-      const fetchAction = {
+      const action = {
         type: FETCH_IMAGES,
       };
-      expect(imagesReducer(initialState, fetchAction)).toEqual(
+
+      expect(imagesReducer(initialState, action)).toEqual(
         initialState.set('isFetching', true),
       );
     });
   });
+
+  describe(FETCH_IMAGES_FULFILLED, () => {
+    it('sets isFetching to false and adds images', () => {
+      const action = {
+        type: FETCH_IMAGES_FULFILLED,
+        payload: [{}, {}, {}],
+      };
+
+      const actualState = imagesReducer(initialState, action);
+      const expectedState = initialState.merge({
+        isFetching: false,
+        images: [],
+      });
+
+      expect(actualState).toEqual(expectedState);
+    });
+  })
 });
