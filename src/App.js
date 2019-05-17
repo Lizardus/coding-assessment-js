@@ -22,6 +22,9 @@ export const App = ({
       >
         {message}
       </a>
+      <p>
+        Scroll down to start loading images
+      </p>
     </header>
     <main>
       <ImagesContainer />
@@ -29,10 +32,6 @@ export const App = ({
   </div>;
 }
 
-// Note: at some point between the previous commit and now the watch
-// stopped working but I hadn't noticed so was banging my head wondering why
-// nothing seemed hooked up properly. Finally realised and did an actual refresh
-// on the page and it all came together here
 const mapStateToProps = state => {
   const messageState = state.get('message');
   return { ...messageState };
