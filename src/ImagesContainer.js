@@ -22,7 +22,14 @@ class ImagesContainer extends PureComponent{
 
       if (offset === height) {
         const { page, pageSize } = this.state;
-        this.props.fetchImages(page, pageSize);
+        const start = (page - 1) * pageSize;
+        const end = start + pageSize;
+        for (let i = start + 1; i <= end; i += 1) {
+          this.props.fetchImages(i);
+        }
+
+        // this.props.fetchImages({ start, end });
+
         this.setState(prevState => ({
           page: prevState.page + 1,
         }));
@@ -35,9 +42,16 @@ class ImagesContainer extends PureComponent{
   }
 
   render() {
+    const { images } = this.props;
     return (
       <div>
         <h1>Heeheeheehee</h1>
+        {images.map(i => (
+          <a key={`image-${i.id}`} href={i.url}>
+            <img src={i.thumbnailUrl} alt={i.title} />
+            <p>{i.id}</p>
+          </a>
+        ))}
       </div>
     );
   }
@@ -49,9 +63,13 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  fetchImages: (page, pageSize) => dispatch({
+  // fetchImages: (range) => dispatch({
+  //   type: FETCH_IMAGES,
+  //   payload: range,
+  // }),
+  fetchImages: (id) => dispatch({
     type: FETCH_IMAGES,
-    payload: { page, pageSize },
+    payload: id,
   }),
 });
 
