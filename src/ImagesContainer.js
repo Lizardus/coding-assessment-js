@@ -4,6 +4,11 @@ import * as rxjs from 'rxjs'
 import { FETCH_IMAGES } from './redux/actions/fetchImageTypes';
 
 class ImagesContainer extends PureComponent{
+  state = {
+    page: 1,
+    pageSize: 20,
+  }
+
   componentDidMount() {
     const userScrolls = rxjs.fromEvent(
       window,
@@ -16,7 +21,11 @@ class ImagesContainer extends PureComponent{
       const height = doc.offsetHeight;
 
       if (offset === height) {
-        this.props.fetchImages();
+        const { page, pageSize } = this.state;
+        this.props.fetchImages(page, pageSize);
+        this.setState(prevState => ({
+          page: prevState.page + 1,
+        }));
       }
     });
   }
@@ -40,8 +49,9 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  fetchImages: () => dispatch({
+  fetchImages: (page, pageSize) => dispatch({
     type: FETCH_IMAGES,
+    payload: { page, pageSize },
   }),
 });
 
